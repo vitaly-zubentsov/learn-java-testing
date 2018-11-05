@@ -12,6 +12,9 @@ public class MyFirstProgram {
 
     Rectangle r = new Rectangle(4,6);
     System.out.println("Площидь прямоугольника со сторонами " + r.a + " и " + r.b + " = " + r.area());
+
+    Point p = new Point(13,14);
+
   }
 
 
