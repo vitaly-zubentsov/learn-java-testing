@@ -16,8 +16,9 @@ public class HelperBase {
 
   protected void type(By locator, String text) {
     click(locator);
+    if (text != null) {
     wd.findElement(locator).clear();
-    wd.findElement(locator).sendKeys(text);
+    wd.findElement(locator).sendKeys(text);  }
   }
   protected void acceptDialogWindow (){
     wd.switchTo().alert().accept();
