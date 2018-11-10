@@ -9,10 +9,10 @@ public class ContactHelper extends HelperBase {
     super(wd);
   }
   public void fillContactForm (ContactData contactData) {
-    type(By.name("firstName"), contactData.getFirstName());
-    type(By.name("middleName"), contactData.getMiddleName());
-    type(By.name("lastName"), contactData.getLastName());
-    type(By.name("nickName"), contactData.getNickName());
+    type(By.name("firstname"), contactData.getFirstName());
+    type(By.name("middlename"), contactData.getMiddleName());
+    type(By.name("lastname"), contactData.getLastName());
+    type(By.name("nickname"), contactData.getNickName());
     type(By.name("title"), contactData.getTitle());
     type(By.name("company"), contactData.getCompany());
     type(By.name("address"), contactData.getAddress());
