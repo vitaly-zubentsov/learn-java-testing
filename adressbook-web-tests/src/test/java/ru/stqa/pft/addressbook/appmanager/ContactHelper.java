@@ -32,4 +32,26 @@ public class ContactHelper extends HelperBase {
   public void submitContactCreation() {
     click(By.xpath("//div[@id='content']/form/input[21]"));
   }
+
+  public void initGroupCreation() {
+    click(By.name("new"));
+  }
+
+  public void deleteSelectedContact() {
+    click(By.xpath("//div[@id='content']/form[2]/div[2]/input"));
+    acceptDialogWindow();
+  }
+
+  public void selectAllContact() {
+    click(By.id("MassCB"));
+  }
+
+  public void initContactModification() {
+    click(By.name("edit"));
+  }
+
+  public void submitContactModification() {
+    click(By.name("update"));
+  }
 }
+
