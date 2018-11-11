@@ -10,6 +10,10 @@ public class ContactModificationTests
   @Test
   public void testsContactCreation() {
     app.getNavigationHelper().gotoHomePage();
+    if (! app.getContactHelper().isThereAContact()) {
+      app.getNavigationHelper().gotoAddNewPage();
+      app.getContactHelper().createContact(new ContactData("test","test","test","test","test","test","test","test","test","test","test","test","test@test.ru","test","test","test","test","test","Test2" ), true);
+    }
     app.getContactHelper().initContactModification();
     app.getContactHelper().fillContactForm(new ContactData("Testm","Testm","Testm","Testm","Testm","Testm","Testm","Testm","Testm","Testm","Testm","Testm","Testm","Testm","Testm","Testm","Testm","Testm", null), false);
     app.getContactHelper().submitContactModification();
