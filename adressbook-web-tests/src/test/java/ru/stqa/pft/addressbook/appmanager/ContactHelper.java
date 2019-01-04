@@ -31,7 +31,7 @@ public class ContactHelper extends HelperBase {
     type(By.name("notes"), contactData.getNotes());
     type(By.name("phone2"), contactData.getPhone2());
     if (creation) {
-      new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+      new Select(wd.findElement(By.cssSelector("[name = new_group]"))).selectByVisibleText(contactData.getGroup());
     } else {
       Assert.assertFalse(isElementPresent(By.name("new_group")));
     }
@@ -57,7 +57,7 @@ public class ContactHelper extends HelperBase {
   }
 
   public void submitContactModification() {
-    click(By.xpath("//div[@id='content']/form[1]/input[22]"));
+    click(By.cssSelector("[value = Update]"));
   }
   public void returnToHomePage() {
     wd.findElement(By.linkText("home page")).click();

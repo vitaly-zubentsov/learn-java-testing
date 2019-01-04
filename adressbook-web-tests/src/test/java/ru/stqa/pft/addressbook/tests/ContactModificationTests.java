@@ -15,7 +15,7 @@ public class ContactModificationTests
       app.getContactHelper().createContact(new ContactData("test","test","test","test","test","test","test","test","test","test","test","test","test@test.ru","test","test","test","test","test","Test2" ), true);
     }
     app.getContactHelper().initContactModification();
-    app.getContactHelper().fillContactForm(new ContactData("Testm","Testm","Testm","Testm","Testm","Testm","Testm","Testm","Testm","Testm","Testm","Testm","Testm","Testm","Testm","Testm","Testm","Testm", null), false);
+    app.getContactHelper().fillContactForm(new ContactData("Testm","test","Testm","Testm","Testm","Testm","Testm","Testm","Testm","Testm","Testm","Testm","Testm","Testm","Testm","Testm","Testm","Testm", null), false);
     app.getContactHelper().submitContactModification();
 
   }
