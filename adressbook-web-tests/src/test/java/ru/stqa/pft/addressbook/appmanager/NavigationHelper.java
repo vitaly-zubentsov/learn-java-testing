@@ -2,6 +2,7 @@ package ru.stqa.pft.addressbook.appmanager;
 
         import org.openqa.selenium.By;
         import org.openqa.selenium.WebDriver;
+        import org.openqa.selenium.WebElement;
 
 public class NavigationHelper extends HelperBase {
 
@@ -10,18 +11,20 @@ public class NavigationHelper extends HelperBase {
   }
 
   public void gotoGroupPage() {
-    if (isElementPresent(By.name("new")) && isElementPresent(By.tagName("h1"))
-            && wd.findElement(By.tagName("h1")).getText().equals("Groups")){
-      return;
+
+    if (isElementPresent(By.name("new")) && isElementPresent(By.cssSelector("#content h1"))
+            && wd.findElement(By.cssSelector("#content h1")).getText().equals("Groups")){
+     return;
     }
     click(By.linkText("groups"));
-  }
+    }
 
   public void gotoAddNewPage() {
-    if (isElementPresent(By.tagName("h1"))
-            && wd.findElement(By.tagName("h1")).getText().equals("Edit / add address book entry")){
+    if (isElementPresent(By.cssSelector("#content h1"))
+            && wd.findElement(By.cssSelector("#content h1")).getText().equals("Edit / add address book entry")){
       return;
     }
+
     click(By.linkText("add new"));
   }
 
