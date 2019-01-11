@@ -2,9 +2,14 @@ package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
+import ru.stqa.pft.addressbook.model.GroupData;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ContactHelper extends HelperBase {
   public ContactHelper(WebDriver wd) {
@@ -76,5 +81,24 @@ public class ContactHelper extends HelperBase {
       return false;
     }
   }
+
+    public List<ContactData> getContactList() {
+      List<ContactData> listOfContact = new ArrayList<ContactData>();
+      List<WebElement> listOfWebElementWithRowOfContaсtData = wd.findElements(By.cssSelector("tr"));
+      for (int i = 1; i<(listOfWebElementWithRowOfContaсtData.size()-1); i++) {
+        List<WebElement> listOfColumns = listOfWebElementWithRowOfContaсtData.get(i).findElements(By.cssSelector("td"));
+        String lastname = listOfColumns.get(1).getText();
+        String firstname = listOfColumns.get(2).getText();
+        String address = listOfColumns.get(3).getText();
+        //На будущее как разберусь с выражениями для получения отдельных строк
+       /* String allEmails = listOfColumns.get(4).getText();
+        String allPhones = listOfColumns.get(5).getText();*/
+        ContactData contactData = new ContactData(firstname,lastname,address);
+        listOfContact.add(contactData);
+
+
+      }
+      return listOfContact;
+    }
 }
 

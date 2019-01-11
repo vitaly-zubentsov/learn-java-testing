@@ -44,6 +44,29 @@ public class ContactData {
     this.group = group;
   }
 
+  public ContactData(String firstName, String lastName, String address) {
+    this.firstName = firstName;
+    this.middleName = null;
+    this.lastName = lastName;
+    this.nickName = null;
+    this.title = null;
+    this.company = null;
+    this.address = address;
+    this.home = null;
+    this.mobile = null;
+    this.work = null;
+    this.fax = null;
+    this.email = null;
+    this.email2 = null;
+    this.email3 = null;
+    this.homepage = null;
+    this.address2 = null;
+    this.notes = null;
+    this.phone2 = null;
+    this.group = null;
+  }
+
+
   public String getFirstName() {
     return firstName;
   }
