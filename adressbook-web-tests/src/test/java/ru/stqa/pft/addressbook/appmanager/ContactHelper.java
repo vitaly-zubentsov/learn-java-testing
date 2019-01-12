@@ -55,7 +55,8 @@ public class ContactHelper extends HelperBase {
     click(By.id("MassCB"));
   }
 
-  public void selectContact () { click(By.name("selected[]"));}
+  public void selectContact (int index) {
+    wd.findElements(By.name("selected[]")).get(index).click();}
 
   public void initContactModification() {
     click(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img"));
@@ -87,13 +88,14 @@ public class ContactHelper extends HelperBase {
       List<WebElement> listOfWebElementWithRowOfContaсtData = wd.findElements(By.cssSelector("tr"));
       for (int i = 1; i<(listOfWebElementWithRowOfContaсtData.size()-1); i++) {
         List<WebElement> listOfColumns = listOfWebElementWithRowOfContaсtData.get(i).findElements(By.cssSelector("td"));
+        int id = Integer.parseInt(listOfColumns.get(0).findElement(By.cssSelector("[type = checkbox]")).getAttribute("value"));
         String lastname = listOfColumns.get(1).getText();
         String firstname = listOfColumns.get(2).getText();
         String address = listOfColumns.get(3).getText();
         //На будущее как разберусь с выражениями для получения отдельных строк
        /* String allEmails = listOfColumns.get(4).getText();
         String allPhones = listOfColumns.get(5).getText();*/
-        ContactData contactData = new ContactData(firstname,lastname,address);
+        ContactData contactData = new ContactData(id, firstname,lastname,address);
         listOfContact.add(contactData);
 
 
