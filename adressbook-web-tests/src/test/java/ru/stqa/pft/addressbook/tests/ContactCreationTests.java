@@ -25,7 +25,12 @@ public class ContactCreationTests extends TestBase {
         int newid = after.stream().max((o1, o2) -> Integer.compare(o1.getId(),o2.getId())).get().getId();
         ContactData newContactFromTable = new ContactData(newid, "test" ,"test" ,"test" );
         before.add(newContactFromTable);
-        Assert.assertEquals( new HashSet<Object>(before) , new HashSet<Object>(after));
+
+        Comparator<? super ContactData> byId = (g1, g2) -> Integer.compare(g1.getId(), g2.getId());
+        before.stream().sorted(byId);
+        after.stream().sorted(byId);
+
+        Assert.assertEquals( before , after);
 
 
     }
