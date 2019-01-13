@@ -75,7 +75,7 @@ public class ContactHelper extends HelperBase {
         wd.findElement(By.linkText("home page")).click();
     }
 
-    public void createContact(ContactData contactData, boolean creation) {
+    public void create(ContactData contactData, boolean creation) {
         fillContactForm(contactData, creation);
         submitContactCreation();
         returnToHomePage();
@@ -89,7 +89,7 @@ public class ContactHelper extends HelperBase {
         }
     }
 
-    public List<ContactData> getContactList() {
+    public List<ContactData> list() {
         List<ContactData> listOfContact = new ArrayList<ContactData>();
         List<WebElement> listOfWebElementWithRowOfContaсtData = wd.findElements(By.cssSelector("tr"));
         for (int i = 1; i < (listOfWebElementWithRowOfContaсtData.size() - 1); i++) {

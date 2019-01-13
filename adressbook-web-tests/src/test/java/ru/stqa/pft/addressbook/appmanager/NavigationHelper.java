@@ -10,7 +10,7 @@ public class NavigationHelper extends HelperBase {
     super(wd);
   }
 
-  public void gotoGroupPage() {
+  public void groupPage() {
 
     if (isElementPresent(By.name("new")) && isElementPresent(By.cssSelector("#content h1"))
             && wd.findElement(By.cssSelector("#content h1")).getText().equals("Groups")){
@@ -19,7 +19,7 @@ public class NavigationHelper extends HelperBase {
     click(By.linkText("groups"));
     }
 
-  public void gotoAddNewPage() {
+  public void addNewPage() {
     if (isElementPresent(By.cssSelector("#content h1"))
             && wd.findElement(By.cssSelector("#content h1")).getText().equals("Edit / add address book entry")){
       return;
@@ -28,7 +28,7 @@ public class NavigationHelper extends HelperBase {
     click(By.linkText("add new"));
   }
 
-  public void gotoHomePage() {
+  public void homePage() {
     if (isElementPresent(By.id("maintable"))){
       return;
     }
