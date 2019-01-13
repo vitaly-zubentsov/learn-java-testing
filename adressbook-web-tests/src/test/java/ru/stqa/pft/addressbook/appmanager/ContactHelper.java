@@ -9,6 +9,7 @@ import ru.stqa.pft.addressbook.model.ContactData;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class ContactHelper extends HelperBase {
     public ContactHelper(WebDriver wd) {
@@ -102,5 +103,7 @@ public class ContactHelper extends HelperBase {
         }
         return listOfContact;
     }
+
+
 }
 
