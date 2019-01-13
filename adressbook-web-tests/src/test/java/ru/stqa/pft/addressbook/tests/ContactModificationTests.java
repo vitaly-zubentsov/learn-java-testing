@@ -15,11 +15,11 @@ public class ContactModificationTests
     app.goTo().homePage();
     if (! app.contact().isThereAContact()) {
       app.goTo().addNewPage();
-      app.contact().create(new ContactData("test","test","test","test","test","test","test","test","test","test","test","test","test@test.ru","test","test","test","test","test","Test2" ), true);
+      app.contact().create(new ContactData().withFirstName("test").withLastName("test").withAddress("test").withEmail("test").withEmail2("test").withEmail3("test").withPhoneWork("test").withPhoneHome("test").withPhoneFax("test").withPhoneMobile("test"), true);
     }
     List<ContactData> before = app.contact().list();
     app.contact().initContactModification();
-    app.contact().fillContactForm(new ContactData("Testm","test","Testm","Testm","Testm","Testm","Testm","Testm","Testm","Testm","Testm","Testm","Testm","Testm","Testm","Testm","Testm","Testm", null), false);
+    app.contact().fillContactForm(new ContactData().withFirstName("test").withLastName("test").withAddress("test").withEmail("test").withEmail2("test").withEmail3("test").withPhoneWork("test").withPhoneHome("test").withPhoneFax("test").withPhoneMobile("test"), false);
     app.contact().submitContactModification();
     //Требуется добавить задержку, сейчас ей что то плохо
     app.goTo().homePage();

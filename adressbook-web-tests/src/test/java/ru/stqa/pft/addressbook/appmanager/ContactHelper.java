@@ -17,23 +17,17 @@ public class ContactHelper extends HelperBase {
 
     public void fillContactForm(ContactData contactData, boolean creation) {
         type(By.name("firstname"), contactData.getFirstName());
-        type(By.name("middlename"), contactData.getMiddleName());
-        type(By.name("lastname"), contactData.getLastName());
-        type(By.name("nickname"), contactData.getNickName());
-        type(By.name("title"), contactData.getTitle());
-        type(By.name("company"), contactData.getCompany());
+              type(By.name("lastname"), contactData.getLastName());
+
         type(By.name("address"), contactData.getAddress());
-        type(By.name("home"), contactData.getHome());
-        type(By.name("mobile"), contactData.getMobile());
-        type(By.name("work"), contactData.getWork());
-        type(By.name("fax"), contactData.getFax());
+        type(By.name("home"), contactData.getPhoneHome());
+        type(By.name("mobile"), contactData.getPhoneMobile());
+        type(By.name("work"), contactData.getPhoneWork());
+        type(By.name("fax"), contactData.getPhoneFax());
         type(By.name("email"), contactData.getEmail());
         type(By.name("email2"), contactData.getEmail2());
         type(By.name("email3"), contactData.getEmail3());
-        type(By.name("homepage"), contactData.getHomepage());
-        type(By.name("address2"), contactData.getAddress2());
-        type(By.name("notes"), contactData.getNotes());
-        type(By.name("phone2"), contactData.getPhone2());
+
         if (creation) {
             new Select(wd.findElement(By.cssSelector("[name = new_group]"))).selectByVisibleText(contactData.getGroup());
         } else {
@@ -101,7 +95,7 @@ public class ContactHelper extends HelperBase {
             //На будущее как разберусь с выражениями для получения отдельных строк
        /* String allEmails = listOfColumns.get(4).getText();
         String allPhones = listOfColumns.get(5).getText();*/
-            ContactData contactData = new ContactData(id, firstname, lastname, address);
+            ContactData contactData = new ContactData().withId(id).withFirstName(firstname).withLastName(lastname).withAddress(address);
             listOfContact.add(contactData);
 
 
