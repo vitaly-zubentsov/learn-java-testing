@@ -14,7 +14,7 @@ public class GroupModificationTests extends TestBase {
   public void ensurePredictions() {
     app.goTo().groupPage();
     if (!app.group().isThereAGroup()) {
-      app.group().create(new GroupData("test1", null, null));
+      app.group().create(new GroupData().withName("test1"));
     }
   }
 
@@ -22,7 +22,7 @@ public class GroupModificationTests extends TestBase {
   public void testGroupModification() {
     List<GroupData> before = app.group().list();
     int index = before.size() - 1;
-    GroupData group = new GroupData(before.get(before.size() -1).getId(),"test1", "test1", "test1");
+    GroupData group = new GroupData().withId(before.get(before.size() -1).getId()).withName("test1").withFooter( "test1").withHeader("test1");
     app.group().modification(index, group);
     List<GroupData> after = app.group().list();
     Assert.assertEquals(after.size(), before.size());
