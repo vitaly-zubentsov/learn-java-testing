@@ -8,10 +8,24 @@ import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ContactHelper extends HelperBase {
+
+    public void delete(ContactData group) {
+        selectContact(group.getId());
+        deleteSelectedContact();
+        contactsCash = null;
+
+    }
+
+    public void create(ContactData contactData) {
+        fillContactForm(contactData);
+        submitContactCreation();
+        contactsCash = null;
+        returnToHomePage();
+    }
+
     public ContactHelper(WebDriver wd) {
         super(wd);
     }
@@ -50,11 +64,6 @@ public class ContactHelper extends HelperBase {
         type(By.name("email3"), contactData.getEmail3());
     }
 
-    public void delete(ContactData group) {
-        selectContact(group.getId());
-        deleteSelectedContact();
-    }
-
     public void submitContactCreation() {
         click(By.name("submit"));
     }
@@ -64,37 +73,14 @@ public class ContactHelper extends HelperBase {
         acceptDialogWindow();
     }
 
-    public void selectAllContact() {
-        click(By.id("MassCB"));
-    }
-
     public void selectContact(int id) {
         wd.findElement(By.cssSelector("input[value = '" + id + "']")).click();
-    }
-
-    public void initContactModification() {
-        click(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img"));
-    }
-
-    public void submitContactModification() {
-        click(By.cssSelector("[value = Update]"));
     }
 
     public void returnToHomePage() {
         wd.findElement(By.linkText("home page")).click();
     }
 
-    public void createWithGroup(ContactData contactData, boolean creation) {
-        fillContactFormWithGroup(contactData, creation);
-        submitContactCreation();
-        returnToHomePage();
-    }
-
-    public void create(ContactData contactData) {
-        fillContactForm(contactData);
-        submitContactCreation();
-        returnToHomePage();
-    }
 
     public boolean isThereAContact() {
         if (isElementPresent(By.name("selected[]"))) {
@@ -104,29 +90,13 @@ public class ContactHelper extends HelperBase {
         }
     }
 
-    public List<ContactData> list() {
-        List<ContactData> listOfContact = new ArrayList<ContactData>();
-        List<WebElement> listOfWebElementWithRowOfContaсtData = wd.findElements(By.cssSelector("tr"));
-        for (int i = 1; i < (listOfWebElementWithRowOfContaсtData.size() - 1); i++) {
-            List<WebElement> listOfColumns = listOfWebElementWithRowOfContaсtData.get(i).findElements(By.cssSelector("td"));
-            int id = Integer.parseInt(listOfColumns.get(0).findElement(By.cssSelector("[type = checkbox]")).getAttribute("value"));
-            String lastname = listOfColumns.get(1).getText();
-            String firstname = listOfColumns.get(2).getText();
-            String address = listOfColumns.get(3).getText();
-            //На будущее как разберусь с выражениями для получения отдельных строк
-       /* String allEmails = listOfColumns.get(4).getText();
-        String allPhones = listOfColumns.get(5).getText();*/
-            ContactData contactData = new ContactData().withId(id).withFirstName(firstname).withLastName(lastname).withAddress(address);
-            listOfContact.add(contactData);
-
-
-        }
-        return listOfContact;
-    }
-
+    private Contacts contactsCash = null;
 
     public Contacts all() {
-        Contacts listOfContact = new Contacts();
+        if (contactsCash != null) {
+            return new Contacts(contactsCash);
+        }
+        contactsCash = new Contacts();
         List<WebElement> listOfWebElementsWithContactDataRow = wd.findElements(By.cssSelector("tr"));
         for (int i = 1; i < (listOfWebElementsWithContactDataRow.size() - 1); i++) {
             List<WebElement> listOfColumns = listOfWebElementsWithContactDataRow.get(i).findElements(By.cssSelector("td"));
@@ -138,10 +108,28 @@ public class ContactHelper extends HelperBase {
        /* String allEmails = listOfColumns.get(4).getText();
         String allPhones = listOfColumns.get(5).getText();*/
             ContactData contactData = new ContactData().withId(id).withFirstName(firstName).withLastName(lastName).withAddress(address);
-            listOfContact.add(contactData);
+            contactsCash.add(contactData);
 
         }
-        return listOfContact;
+        return new Contacts(contactsCash);
+    }
+
+    public void createWithGroup(ContactData contactData, boolean creation) {
+        fillContactFormWithGroup(contactData, creation);
+        submitContactCreation();
+        returnToHomePage();
+    }
+
+    public void selectAllContact() {
+        click(By.id("MassCB"));
+    }
+
+    public void initContactModification() {
+        click(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img"));
+    }
+
+    public void submitContactModification() {
+        click(By.cssSelector("[value = Update]"));
     }
 }
 
