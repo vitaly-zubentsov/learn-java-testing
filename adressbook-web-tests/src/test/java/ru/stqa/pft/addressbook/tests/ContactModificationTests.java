@@ -9,7 +9,7 @@ import java.util.List;
 public class ContactModificationTests
  extends TestBase {
 
-
+/*
   @Test(enabled = false)
   public void testsContactCreation() {
     app.goTo().homePage();
@@ -19,11 +19,11 @@ public class ContactModificationTests
     }
     List<ContactData> before = app.contact().list();
     app.contact().initContactModification();
-    app.contact().fillContactForm(new ContactData().withFirstName("test").withLastName("test").withAddress("test").withEmail("test").withEmail2("test").withEmail3("test").withPhoneWork("test").withPhoneHome("test").withPhoneFax("test").withPhoneMobile("test"), false);
+    app.contact().fillContactFormWithGroup(new ContactData().withFirstName("test").withLastName("test").withAddress("test").withEmail("test").withEmail2("test").withEmail3("test").withPhoneWork("test").withPhoneHome("test").withPhoneFax("test").withPhoneMobile("test"), false);
     app.contact().submitContactModification();
     //Требуется добавить задержку, сейчас ей что то плохо
     app.goTo().homePage();
     List<ContactData> after = app.contact().list();
     Assert.assertEquals(before.size(), after.size());
-  }
+  }*/
 }
