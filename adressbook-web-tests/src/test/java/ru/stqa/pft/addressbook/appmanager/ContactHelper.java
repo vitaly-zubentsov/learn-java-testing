@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
+import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.GroupData;
 
 import java.util.ArrayList;
@@ -127,19 +128,19 @@ public class ContactHelper extends HelperBase {
     }
 
 
-    public Set<ContactData> all() {
-        Set<ContactData> listOfContact = new HashSet<>();
-        List<WebElement> listOfWebElementWithRowOfContaсtData = wd.findElements(By.cssSelector("tr"));
-        for (int i = 1; i < (listOfWebElementWithRowOfContaсtData.size() - 1); i++) {
-            List<WebElement> listOfColumns = listOfWebElementWithRowOfContaсtData.get(i).findElements(By.cssSelector("td"));
+    public Contacts all() {
+        Contacts listOfContact = new Contacts();
+        List<WebElement> listOfWebElementsWithContactDataRow = wd.findElements(By.cssSelector("tr"));
+        for (int i = 1; i < (listOfWebElementsWithContactDataRow.size() - 1); i++) {
+            List<WebElement> listOfColumns = listOfWebElementsWithContactDataRow.get(i).findElements(By.cssSelector("td"));
             int id = Integer.parseInt(listOfColumns.get(0).findElement(By.cssSelector("[type = checkbox]")).getAttribute("value"));
-            String lastname = listOfColumns.get(1).getText();
-            String firstname = listOfColumns.get(2).getText();
+            String lastName = listOfColumns.get(1).getText();
+            String firstName = listOfColumns.get(2).getText();
             String address = listOfColumns.get(3).getText();
             //На будущее как разберусь с выражениями для получения отдельных строк
        /* String allEmails = listOfColumns.get(4).getText();
         String allPhones = listOfColumns.get(5).getText();*/
-            ContactData contactData = new ContactData().withId(id).withFirstName(firstname).withLastName(lastname).withAddress(address);
+            ContactData contactData = new ContactData().withId(id).withFirstName(firstName).withLastName(lastName).withAddress(address);
             listOfContact.add(contactData);
 
         }
