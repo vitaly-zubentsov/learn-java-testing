@@ -26,6 +26,9 @@ public class HelperBase {
       }
     }
   }
+  protected void goBack() {
+    wd.navigate().back();
+  }
 
   protected void acceptDialogWindow() {
     wd.switchTo().alert().accept();
