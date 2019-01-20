@@ -143,6 +143,29 @@ public class ContactHelper extends HelperBase {
         return new ContactData().withId(id).withFirstName(firstname).withLastName(lastname).withAddress(address).withPhoneHome(phonehome).withPhoneMobile(phonemobile).withPhoneWork(phonework).withEmail(email).withEmail2(emai2).withEmail3(emai3);
     }
 
+    public ContactData oneFromDetails(int id) {
+        goToDetailsFromTable(id);
+        String allData = wd.findElement(By.cssSelector("#content")).getText().replaceAll("\n", " ").replaceAll("  ", " ");
+        String[] arrayOfData = allData.split(" ");
+        String firstname = arrayOfData[0];
+        String lastname = arrayOfData[1];
+        String address = arrayOfData[2];
+        String phonehome = arrayOfData[4];
+        String phonemobile = arrayOfData[6];
+        String phonework = arrayOfData[8];
+        String email = arrayOfData[9];
+        String emai2 = arrayOfData[10];
+        String emai3 = arrayOfData[11];
+        goBack();
+        return new ContactData().withId(id).withFirstName(firstname).withLastName(lastname).withAddress(address).withPhoneHome(phonehome).withPhoneMobile(phonemobile).withPhoneWork(phonework).withEmail(email).withEmail2(emai2).withEmail3(emai3);
+
+
+    }
+
+    private void goToDetailsFromTable(int id) {
+        click(By.cssSelector(String.format("a[href = 'view.php?id=%s']", id)));
+    }
+
 
     public void createWithGroup(ContactData contactData, boolean creation) {
         fillContactFormWithGroup(contactData, creation);
@@ -165,6 +188,5 @@ public class ContactHelper extends HelperBase {
     public void submitContactModification() {
         click(By.cssSelector("[value = Update]"));
     }
-
 }
 

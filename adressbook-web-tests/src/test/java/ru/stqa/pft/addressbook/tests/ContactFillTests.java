@@ -23,24 +23,30 @@ public class ContactFillTests extends TestBase {
     }
 
     @Test
-    public void testsContactFill() {
+    public void testContactFill() {
         app.goTo().homePage();
         ContactData contactFromHomePage = app.contact().oneFromTable();
         ContactData contactFromModification = app.contact().oneFromModification(contactFromHomePage.getId());
         assertThat(contactFromHomePage, equalTo(contactFromModification));
         assertThat(contactFromHomePage.getAllEmails(), equalTo(mergeAllEmails(contactFromModification)));
         assertThat(contactFromHomePage.getAllPhones(), equalTo(mergeAllPhones(contactFromModification)));
+        ContactData contactFromDetails = app.contact().oneFromDetails(contactFromHomePage.getId());
+        assertThat(contactFromHomePage, equalTo(contactFromDetails));
+        assertThat(contactFromHomePage.getAllEmails(), equalTo(mergeAllEmails(contactFromDetails)));
+        assertThat(contactFromHomePage.getAllPhones(), equalTo(mergeAllPhones(contactFromDetails)));
     }
+
 
     private String mergeAllEmails(ContactData contact) {
         return Arrays.asList(contact.getEmail(), contact.getEmail2(), contact.getEmail3()).stream().filter((s) -> !s.equals("")).collect(Collectors.joining("\n"));
     }
 
+
     private String mergeAllPhones(ContactData contact) {
         return Arrays.asList(contact.getPhoneHome(), contact.getPhoneMobile(), contact.getPhoneWork()).stream().filter((s) -> !s.equals("")).map(ContactFillTests::cleaned).collect(Collectors.joining("\n"));
     }
 
-    public static String cleaned(String phone){
+    public static String cleaned(String phone) {
         return phone.replaceAll("\\s", "").replaceAll("[-()]", "");
     }
 }
