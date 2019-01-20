@@ -8,7 +8,6 @@ import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
 
-import java.util.HashSet;
 import java.util.List;
 
 public class ContactHelper extends HelperBase {
@@ -99,7 +98,7 @@ public class ContactHelper extends HelperBase {
         }
         contactsCash = new Contacts();
         List<WebElement> listOfWebElementsWithContactDataRow = wd.findElements(By.cssSelector("tr"));
-        for (int i = 1; i < (listOfWebElementsWithContactDataRow.size() - 1); i++) {
+        for (int i = 1; i <= (listOfWebElementsWithContactDataRow.size() - 1); i++) {
             List<WebElement> listOfColumns = listOfWebElementsWithContactDataRow.get(i).findElements(By.cssSelector("td"));
             int id = Integer.parseInt(listOfColumns.get(0).findElement(By.cssSelector("[type = checkbox]")).getAttribute("value"));
             String lastName = listOfColumns.get(1).getText();
@@ -118,8 +117,8 @@ public class ContactHelper extends HelperBase {
         WebElement row = wd.findElements(By.xpath("//tr [@name='entry']")).iterator().next();
       /*  int id = Integer.parseInt(checkbox.getAttribute("value"));
         WebElement row = checkbox.findElement(By.xpath("./../.."));*/
-                List<WebElement> cells = row.findElements(By.cssSelector("td"));
-        int id  = Integer.parseInt(cells.get(0).findElement(By.cssSelector("input")).getAttribute("value"));
+        List<WebElement> cells = row.findElements(By.cssSelector("td"));
+        int id = Integer.parseInt(cells.get(0).findElement(By.cssSelector("input")).getAttribute("value"));
         String lastName = cells.get(1).getText();
         String firstName = cells.get(2).getText();
         String address = cells.get(3).getText();
@@ -131,20 +130,18 @@ public class ContactHelper extends HelperBase {
 
     public ContactData oneFromModification(int id) {
         goToModificationFromTable(id);
-        String firstname = wd.findElement(By.name("firstname")).getText();
-        String lastname = wd.findElement(By.name("lastname")).getText();
-        String address = wd.findElement(By.name("address")).getText();
-        String phonehome = wd.findElement(By.name("home")).getText();
-        String phonemobile = wd.findElement(By.name("mobile")).getText();
-        String phonework = wd.findElement(By.name("work")).getText();
-        String phonefax = wd.findElement(By.name("fax")).getText();
-        String email = wd.findElement(By.name("email")).getText();
-        String emai2 = wd.findElement(By.name("email2")).getText();
-        String emai3 = wd.findElement(By.name("email3")).getText();
+        String firstname = wd.findElement(By.cssSelector("[name = firstname]")).getAttribute("value");
+        String lastname = wd.findElement(By.cssSelector("[name = lastname]")).getAttribute("value");
+        String address = wd.findElement(By.cssSelector("[name = address]")).getText();
+        String phonehome = wd.findElement(By.cssSelector("[name = home]")).getAttribute("value");
+        String phonemobile = wd.findElement(By.cssSelector("[name = mobile]")).getAttribute("value");
+        String phonework = wd.findElement(By.cssSelector("[name = work]")).getAttribute("value");
+        String email = wd.findElement(By.cssSelector("[name = email]")).getAttribute("value");
+        String emai2 = wd.findElement(By.cssSelector("[name = email2]")).getAttribute("value");
+        String emai3 = wd.findElement(By.cssSelector("[name = email3]")).getAttribute("value");
         goBack();
-        return new ContactData().withId(id).withFirstName(firstname).withLastName(lastname).withAddress(address).withPhoneHome(phonehome).withPhoneMobile(phonemobile).withPhoneWork(phonework).withPhoneFax(phonefax).withEmail(email).withEmail2(emai2).withEmail3(emai3);
+        return new ContactData().withId(id).withFirstName(firstname).withLastName(lastname).withAddress(address).withPhoneHome(phonehome).withPhoneMobile(phonemobile).withPhoneWork(phonework).withEmail(email).withEmail2(emai2).withEmail3(emai3);
     }
-
 
 
     public void createWithGroup(ContactData contactData, boolean creation) {

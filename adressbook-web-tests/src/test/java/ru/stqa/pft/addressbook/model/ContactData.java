@@ -117,19 +117,12 @@ public class ContactData {
                 Objects.equals(group, that.group) &&
                 Objects.equals(firstName, that.firstName) &&
                 Objects.equals(lastName, that.lastName) &&
-                Objects.equals(address, that.address) &&
-                Objects.equals(phoneHome, that.phoneHome) &&
-                Objects.equals(phoneMobile, that.phoneMobile) &&
-                Objects.equals(phoneWork, that.phoneWork) &&
-                Objects.equals(phoneFax, that.phoneFax) &&
-                Objects.equals(email, that.email) &&
-                Objects.equals(email2, that.email2) &&
-                Objects.equals(email3, that.email3);
+                Objects.equals(address, that.address);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, group, firstName, lastName, address, phoneHome, phoneMobile, phoneWork, phoneFax, email, email2, email3);
+        return Objects.hash(id, group, firstName, lastName, address);
     }
 
     public int getId() {
