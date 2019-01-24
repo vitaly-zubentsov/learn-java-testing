@@ -20,6 +20,16 @@ public class GroupData {
         return this;
     }
 
+    @Override
+    public String toString() {
+        return "GroupData{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", header='" + header + '\'' +
+                ", footer='" + footer + '\'' +
+                '}';
+    }
+
     public GroupData withHeader(String header) {
         this.header = header;
         return this;
@@ -59,14 +69,6 @@ public class GroupData {
     @Override
     public int hashCode() {
         return Objects.hash(id, name);
-    }
-
-    @Override
-    public String toString() {
-        return "GroupData{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
     }
 
 
