@@ -30,10 +30,13 @@ public class ContactFillTests extends TestBase {
         assertThat(contactFromHomePage, equalTo(contactFromModification));
         assertThat(contactFromHomePage.getAllEmails(), equalTo(mergeAllEmails(contactFromModification)));
         assertThat(contactFromHomePage.getAllPhones(), equalTo(mergeAllPhones(contactFromModification)));
+
         ContactData contactFromDetails = app.contact().oneFromDetails(contactFromHomePage.getId());
-        assertThat(contactFromHomePage, equalTo(contactFromDetails));
-        assertThat(contactFromHomePage.getAllEmails(), equalTo(mergeAllEmails(contactFromDetails)));
-        assertThat(contactFromHomePage.getAllPhones(), equalTo(mergeAllPhones(contactFromDetails)));
+        String modifiedName = contactFromHomePage.getFirstName() + " " + contactFromHomePage.getLastName();
+        ContactData contactFromHomePageWithConcetanation = contactFromHomePage.withFirstName(modifiedName).withLastName(modifiedName);
+        assertThat(contactFromHomePageWithConcetanation, equalTo(contactFromDetails));
+        assertThat(contactFromHomePageWithConcetanation.getAllEmails(), equalTo(mergeAllEmails(contactFromDetails)));
+        assertThat(contactFromHomePageWithConcetanation.getAllPhones(), equalTo(mergeAllPhones(contactFromDetails)));
     }
 
 

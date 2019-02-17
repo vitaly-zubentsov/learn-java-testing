@@ -134,17 +134,17 @@ public class ContactHelper extends HelperBase {
 
     public ContactData oneFromDetails(int id) {
         goToDetailsFromTable(id);
-        String allData = wd.findElement(By.cssSelector("#content")).getText().replaceAll("\n", " ").replaceAll("  ", " ");
-        String[] arrayOfData = allData.split(" ");
+        String allData = wd.findElement(By.cssSelector("#content")).getText();
+        String[] arrayOfData = allData.split("\n");
         String firstname = arrayOfData[0];
-        String lastname = arrayOfData[1];
-        String address = arrayOfData[2];
-        String phonehome = arrayOfData[4];
-        String phonemobile = arrayOfData[6];
-        String phonework = arrayOfData[8];
-        String email = arrayOfData[9];
-        String emai2 = arrayOfData[10];
-        String emai3 = arrayOfData[11];
+        String lastname = arrayOfData[0];
+        String address = arrayOfData[1];
+        String phonehome = arrayOfData[3].replaceAll("H: ", "");
+        String phonemobile = arrayOfData[4].replaceAll("M: ", "");
+        String phonework = arrayOfData[5].replaceAll("W: ", "");
+        String email = arrayOfData[7];
+        String emai2 = arrayOfData[8];
+        String emai3 = arrayOfData[9];
         goBack();
         return new ContactData().withId(id).withFirstName(firstname).withLastName(lastname).withAddress(address).withPhoneHome(phonehome).withPhoneMobile(phonemobile).withPhoneWork(phonework).withEmail(email).withEmail2(emai2).withEmail3(emai3);
 
