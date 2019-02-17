@@ -19,8 +19,8 @@ public class ContactHelper extends HelperBase {
 
     }
 
-    public void create(ContactData contactData) {
-        fillContactForm(contactData);
+    public void create(ContactData contactData, boolean creation) {
+        fillContactForm(contactData, creation);
         submitContactCreation();
         contactsCash = null;
         returnToHomePage();
@@ -30,7 +30,7 @@ public class ContactHelper extends HelperBase {
         super(wd);
     }
 
-    public void fillContactFormWithGroup(ContactData contactData, boolean creation) {
+    public void fillContactForm(ContactData contactData, boolean creation) {
         type(By.name("firstname"), contactData.getFirstName());
         type(By.name("lastname"), contactData.getLastName());
 
@@ -44,25 +44,14 @@ public class ContactHelper extends HelperBase {
         type(By.name("email3"), contactData.getEmail3());
 
         if (creation) {
-            new Select(wd.findElement(By.cssSelector("[name = new_group]"))).selectByVisibleText(contactData.getGroup());
+            if (contactData.getGroups().size() > 0)
+                Assert.assertTrue(contactData.getGroups().size() == 1);
+            new Select(wd.findElement(By.cssSelector("[name = new_group]"))).selectByVisibleText(contactData.getGroups().iterator().next().getName());
         } else {
             Assert.assertFalse(isElementPresent(By.name("new_group")));
         }
     }
 
-    public void fillContactForm(ContactData contactData) {
-        type(By.name("firstname"), contactData.getFirstName());
-        type(By.name("lastname"), contactData.getLastName());
-
-        type(By.name("address"), contactData.getAddress());
-        type(By.name("home"), contactData.getPhoneHome());
-        type(By.name("mobile"), contactData.getPhoneMobile());
-        type(By.name("work"), contactData.getPhoneWork());
-        type(By.name("fax"), contactData.getPhoneFax());
-        type(By.name("email"), contactData.getEmail());
-        type(By.name("email2"), contactData.getEmail2());
-        type(By.name("email3"), contactData.getEmail3());
-    }
 
     public void submitContactCreation() {
         click(By.name("submit"));
@@ -164,13 +153,6 @@ public class ContactHelper extends HelperBase {
 
     private void goToDetailsFromTable(int id) {
         click(By.cssSelector(String.format("a[href = 'view.php?id=%s']", id)));
-    }
-
-
-    public void createWithGroup(ContactData contactData, boolean creation) {
-        fillContactFormWithGroup(contactData, creation);
-        submitContactCreation();
-        returnToHomePage();
     }
 
     public void goToModificationFromTable(int id) {
