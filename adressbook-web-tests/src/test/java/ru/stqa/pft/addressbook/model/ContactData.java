@@ -156,12 +156,21 @@ public class ContactData {
         return this;
     }
 
-     @Override
+    @Override
     public String toString() {
         return "ContactData{" +
-                "firstName='" + firstName + '\'' +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", id=" + id +
+                ", address='" + address + '\'' +
+                ", phoneHome='" + phoneHome + '\'' +
+                ", phoneMobile='" + phoneMobile + '\'' +
+                ", phoneWork='" + phoneWork + '\'' +
+                ", phoneFax='" + phoneFax + '\'' +
+                ", email='" + email + '\'' +
+                ", email2='" + email2 + '\'' +
+                ", email3='" + email3 + '\'' +
+                ", groups=" + groups +
                 '}';
     }
 
@@ -173,12 +182,20 @@ public class ContactData {
         return id == that.id &&
                 Objects.equals(firstName, that.firstName) &&
                 Objects.equals(lastName, that.lastName) &&
-                Objects.equals(address, that.address);
+                Objects.equals(address, that.address) &&
+                Objects.equals(phoneHome, that.phoneHome) &&
+                Objects.equals(phoneMobile, that.phoneMobile) &&
+                Objects.equals(phoneWork, that.phoneWork) &&
+                Objects.equals(phoneFax, that.phoneFax) &&
+                Objects.equals(email, that.email) &&
+                Objects.equals(email2, that.email2) &&
+                Objects.equals(email3, that.email3) &&
+                Objects.equals(groups, that.groups);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, address);
+        return Objects.hash(id, firstName, lastName, address, phoneHome, phoneMobile, phoneWork, phoneFax, email, email2, email3, groups);
     }
 
     public int getId() {

@@ -27,14 +27,18 @@ public class ContactFillTests extends TestBase {
         app.goTo().homePage();
         ContactData contactFromHomePage = app.contact().oneFromTable();
         ContactData contactFromModification = app.contact().oneFromModification(contactFromHomePage.getId());
-        assertThat(contactFromHomePage, equalTo(contactFromModification));
+        assertThat(contactFromHomePage.getFirstName(), equalTo(contactFromModification.getFirstName()));
+        assertThat(contactFromHomePage.getLastName(), equalTo(contactFromModification.getLastName()));
+        assertThat(contactFromHomePage.getAddress(), equalTo(contactFromModification.getAddress()));
         assertThat(contactFromHomePage.getAllEmails(), equalTo(mergeAllEmails(contactFromModification)));
         assertThat(contactFromHomePage.getAllPhones(), equalTo(mergeAllPhones(contactFromModification)));
 
         ContactData contactFromDetails = app.contact().oneFromDetails(contactFromHomePage.getId());
         String modifiedName = contactFromHomePage.getFirstName() + " " + contactFromHomePage.getLastName();
         ContactData contactFromHomePageWithConcetanation = contactFromHomePage.withFirstName(modifiedName).withLastName(modifiedName);
-        assertThat(contactFromHomePageWithConcetanation, equalTo(contactFromDetails));
+        assertThat(contactFromHomePageWithConcetanation.getFirstName(), equalTo(contactFromDetails.getFirstName()));
+        assertThat(contactFromHomePageWithConcetanation.getLastName(), equalTo(contactFromDetails.getLastName()));
+        assertThat(contactFromHomePageWithConcetanation.getAddress(), equalTo(contactFromDetails.getAddress()));
         assertThat(contactFromHomePageWithConcetanation.getAllEmails(), equalTo(mergeAllEmails(contactFromDetails)));
         assertThat(contactFromHomePageWithConcetanation.getAllPhones(), equalTo(mergeAllPhones(contactFromDetails)));
     }

@@ -40,8 +40,9 @@ public class ContactCreationTests extends TestBase {
 
     @BeforeMethod
     public void ensurePredictions() {
-        app.goTo().groupPage();
-        if (app.db().groups() == null) {
+        app.goTo().homePage();
+        if (app.db().groups().size() < 1 ) {
+            app.goTo().groupPage();
             app.group().create(new GroupData().withName("test1"));
         }
     }
@@ -53,10 +54,9 @@ public class ContactCreationTests extends TestBase {
         app.goTo().addNewPage();
         app.contact().create(contact.inGroup(group), true);
         Contacts after = app.db().contacts();
-        assertThat(before.size() + 1, equalTo(after.size()));
-
-        assertThat(before.withAdded(contact.withId(after.stream().mapToInt((g1) -> g1.getId()).max().getAsInt())), equalTo(after));
-
+        Contacts test = before.withAdded(contact.withId(after.stream().mapToInt((g1) -> g1.getId()).max().getAsInt()));
+        assertThat(test, equalTo(after));
+        verifyContactsListInUI();
 
     }
 

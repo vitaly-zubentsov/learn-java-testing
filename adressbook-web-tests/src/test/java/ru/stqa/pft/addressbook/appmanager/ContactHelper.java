@@ -142,9 +142,9 @@ public class ContactHelper extends HelperBase {
         String phonehome = arrayOfData[3].replaceAll("H: ", "");
         String phonemobile = arrayOfData[4].replaceAll("M: ", "");
         String phonework = arrayOfData[5].replaceAll("W: ", "");
-        String email = arrayOfData[7];
-        String emai2 = arrayOfData[8];
-        String emai3 = arrayOfData[9];
+        String email = arrayOfData[8];
+        String emai2 = arrayOfData[9];
+        String emai3 = arrayOfData[10];
         goBack();
         return new ContactData().withId(id).withFirstName(firstname).withLastName(lastname).withAddress(address).withPhoneHome(phonehome).withPhoneMobile(phonemobile).withPhoneWork(phonework).withEmail(email).withEmail2(emai2).withEmail3(emai3);
 
