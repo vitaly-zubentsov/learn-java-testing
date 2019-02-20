@@ -14,10 +14,11 @@ public class ContactDeletionTests extends TestBase {
     @BeforeMethod
     public void ensurePredictions() {
         app.goTo().homePage();
+        app.contact().showAllContacts();
         if (!app.contact().isThereAContact()) {
             ContactData contact = new ContactData().withFirstName("test").withLastName("test").withAddress("test");
             app.goTo().addNewPage();
-            app.contact().create(contact, false);
+            app.contact().create(contact, true, false);
         }
     }
 

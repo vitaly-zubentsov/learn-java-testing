@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
+import ru.stqa.pft.addressbook.model.GroupData;
 
 import java.util.List;
 
@@ -19,8 +20,8 @@ public class ContactHelper extends HelperBase {
 
     }
 
-    public void create(ContactData contactData, boolean creation) {
-        fillContactForm(contactData, creation);
+    public void create(ContactData contactData, boolean creationWithGroup, boolean modify) {
+        fillContactForm(contactData, creationWithGroup, modify);
         submitContactCreation();
         contactsCash = null;
         returnToHomePage();
@@ -30,7 +31,7 @@ public class ContactHelper extends HelperBase {
         super(wd);
     }
 
-    public void fillContactForm(ContactData contactData, boolean creation) {
+    public void fillContactForm(ContactData contactData, boolean creationWithGroup, boolean modify) {
         type(By.name("firstname"), contactData.getFirstName());
         type(By.name("lastname"), contactData.getLastName());
 
@@ -43,14 +44,15 @@ public class ContactHelper extends HelperBase {
         type(By.name("email2"), contactData.getEmail2());
         type(By.name("email3"), contactData.getEmail3());
 
-        if (creation) {
+        if (creationWithGroup) {
             if (contactData.getGroups().size() > 0)
                 Assert.assertTrue(contactData.getGroups().size() == 1);
             new Select(wd.findElement(By.cssSelector("[name = new_group]"))).selectByVisibleText(contactData.getGroups().iterator().next().getName());
-        } else {
-            Assert.assertFalse(isElementPresent(By.name("new_group")));
         }
-    }
+        if (modify) Assert.assertFalse(isElementPresent(By.name("new_group")));
+
+
+}
 
 
     public void submitContactCreation() {
@@ -68,6 +70,10 @@ public class ContactHelper extends HelperBase {
 
     public void returnToHomePage() {
         wd.findElement(By.linkText("home page")).click();
+    }
+
+    public void submitToAddGroup() {
+        wd.findElement(By.cssSelector("input[name=add]")).click();
     }
 
 
@@ -169,6 +175,22 @@ public class ContactHelper extends HelperBase {
 
     public void submitContactModification() {
         click(By.cssSelector("[value = Update]"));
+    }
+
+    public void addedToGroup(GroupData addedGroup, int idOfConatct) {
+        new Select(wd.findElement(By.cssSelector("[name = to_group]"))).selectByVisibleText(addedGroup.getName());
+        chooseContact(idOfConatct);
+        submitToAddGroup();
+
+    }
+
+    private void chooseContact(int idOfConatct) {
+        wd.findElement(By.cssSelector(String.format("input[id='%s']" , idOfConatct))).click();
+    }
+
+
+    public void showAllContacts() {
+        new Select(wd.findElement(By.cssSelector("select[name=group]"))).selectByVisibleText("[all]");
     }
 }
 
