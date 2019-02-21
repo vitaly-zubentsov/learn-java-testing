@@ -192,5 +192,23 @@ public class ContactHelper extends HelperBase {
     public void showAllContacts() {
         new Select(wd.findElement(By.cssSelector("select[name=group]"))).selectByVisibleText("[all]");
     }
+
+    public void deletedFromGroup(String nameOfDeletedGroup, int idOfConatct) {
+        showContactsInGroup(nameOfDeletedGroup);
+        chooseContact(idOfConatct);
+        submitToDeleteGroup();
+
+
+    }
+
+    private void submitToDeleteGroup() {
+        wd.findElement(By.cssSelector(" input[name=remove]")).click();
+    }
+
+    private void showContactsInGroup(String nameOfGroup) {
+        new Select(wd.findElement(By.cssSelector("select[name=group]"))).selectByVisibleText(nameOfGroup);
+    }
+
+
 }
 
