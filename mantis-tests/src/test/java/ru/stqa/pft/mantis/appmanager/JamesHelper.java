@@ -49,6 +49,7 @@ public class JamesHelper {
         String result = readUntil("User " + name + " deleted");
         closeTelnetSession();
     }
+//Перенести данные паролей в локальные данные.
 
     private void initTelnetSession() {
         mailserver = app.getProperty("mailserver.host");
