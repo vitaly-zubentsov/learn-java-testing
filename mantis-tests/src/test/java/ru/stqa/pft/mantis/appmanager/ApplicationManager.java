@@ -21,6 +21,10 @@ public class ApplicationManager {
     private MailHelper mailHelper;
     private JamesHelper jamesHelper;
     private SoapHelper soapHelper;
+    private SessionHelper sessionHelper;
+    private NavigationHelper navigationHelper;
+    private UserHelper userHelper;
+
 
     public ApplicationManager(String browser) {
         this.browser = browser;
@@ -75,7 +79,7 @@ public class ApplicationManager {
         return wd;
     }
 
-    public MailHelper mail () {
+    public MailHelper mail() {
         if (mailHelper == null) {
             mailHelper = new MailHelper(this);
         }
@@ -83,10 +87,10 @@ public class ApplicationManager {
     }
 
     public JamesHelper james() {
-        if (jamesHelper ==null) {
+        if (jamesHelper == null) {
             jamesHelper = new JamesHelper(this);
         }
-        return  jamesHelper;
+        return jamesHelper;
     }
 
     public SoapHelper soap() {
@@ -94,5 +98,26 @@ public class ApplicationManager {
             soapHelper = new SoapHelper(this);
         }
         return soapHelper;
+    }
+
+    public SessionHelper session() {
+        if (sessionHelper == null) {
+            sessionHelper = new SessionHelper(this);
+        }
+        return sessionHelper;
+    }
+
+    public NavigationHelper navigate() {
+        if (navigationHelper == null) {
+            navigationHelper = new NavigationHelper(this);
+        }
+        return navigationHelper;
+    }
+
+    public UserHelper user() {
+        if (userHelper == null) {
+            userHelper = new UserHelper(this);
+        }
+        return userHelper;
     }
 }

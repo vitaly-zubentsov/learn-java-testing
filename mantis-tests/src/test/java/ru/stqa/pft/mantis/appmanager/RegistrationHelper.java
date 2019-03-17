@@ -21,4 +21,14 @@ public class RegistrationHelper extends HelperBase {
         type(By.cssSelector("[name= 'password_confirm']"), password);
         click(By.cssSelector("input[value ='Update User']"));
     }
+
+    public void changePassword(String confirmationLink, String password) {
+        wd.get(confirmationLink);
+        type(By.cssSelector("[name=password]"), password);
+        type(By.cssSelector("[name= 'password_confirm']"), password);
+        click(By.cssSelector("input[value ='Update User']"));
+    }
+
+
+
 }
